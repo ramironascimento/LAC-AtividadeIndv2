@@ -1,0 +1,9 @@
+( ) - o que é uma maquina de turing universal
+( ) - como funciona uma maquina de turing universal
+( ) - explique a implicação da existencia de maquinas deste tipo. Ex: existe uma maquina de turing no moodle?
+( ) - gramatica regular 
+
+ DICAS
+
+- usar exemplos diferentes
+- citar as referencias
