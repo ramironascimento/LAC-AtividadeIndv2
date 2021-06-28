@@ -14,7 +14,7 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 \title{Avaliação Individual 2}
-\author{Ramiro Berneira Nascimento}
+\author{Ramiro Berneira Nascimento\thanks{ramirobnascimento@hotmail.com}}
 
 \begin{document}
 \maketitle
@@ -34,39 +34,100 @@ This scientific paper was proposed as the Final Individual Assessment Activity f
     
     $G = ({A,B}, {a,b,c,d}, R, A)$ a relação R é definida pelas seguintes produções:
     
-                                                 \[A \longrightarrow aB | aA\] 
-                                                \[B \longrightarrow bB | aA | cA | d\]
+                             \[A \longrightarrow aB | aA\] 
+                            \[B \longrightarrow bB | aA | cA | d\]
                      
     
     
     
     
 
-\section{Máquina de Turing }
-    Alan Turing foi um matemático britânico que estava em busca da prova matemática de que o problema proposto por David Hilbert e Wilhelm Ackermann, o Entscheidungsproblem, nao tinha um método ou procedimento geral efetivo para calcular ou computar todas as instancias do problema. 
-    A partir desse objetivo, Turing criou, o que ele próprio chamava na época, de Máquina Computável (hoje conhecida como Máquina de Turing).
+\section{Máquina de Turing Universal}
+
+    Alan Turing foi um matemático britânico que estava em busca da prova matemática de que o problema proposto por David Hilbert e Wilhelm Ackermann, o Entscheidungsproblem, nao tinha um método ou procedimento geral efetivo para calcular ou computar todas as instancias do problema.
+    
+    A partir desse objetivo, Turing criou, o que ele próprio chamava na época, de Máquina Computável (hoje conhecida como Máquina de Turing), composta de uma fita com infinitas células, um cabeçote de leitura e escrita, e um controle que computa e permite mover o cabeçote 1 célula para a esquerda ou para direita. Para programar esta máquina foi definido conjunto de elementos, conhecido como \textbf{Tupla}, que sendo usados da maneira correta, são capazes de reconhecer ou não uma determinada entrada a partir da configuração da máquina. Em uma comparação simples com o que temos nos dias atuais, uma Máquina de Turing seria equivalente a um programa de um computador digital moderno. Em outras palavras, é um algoritmo que recebe valores de entrada que segue um conjunto pré-determinado de passos que gera um resultado previsível e determinístico. 
     
     A definição formal e teórica de uma Máquina de Turing de apenas uma fita é composta da seguinte Tupla:
     
     \begin{itemize}
-        \item $\Sigma$: um alfabeto finito de símbolos
+        \item $\Sigma$: um alfabeto finito de entrada (não contém o símbolo branco)
         \item Q: um conjunto finito de estados
-        \item $\delta$: conjunto de funções de transição 
-        \item Qi: estado inicial
-        \item Qf: conjunto de estados finais
-        \item $\Gamma$: é o alfabeto da fita (palavra de entrada)
-        \item b : simbolo branco
-        \item ${\Longrightarrow}$ : indicador de direção da fita
+        \item $\delta$: conjunto de funções de transição
+        \item $\Gamma$: é o alfabeto da fita
+        \item $Q_0 \in Q$: estado inicial
+        \item $Q_{final} \in Q $: conjunto de estados de aceitação
+        \item $Q_{rejeita} \in Q $: conjunto de estados de rejeição
 \end{itemize}
-
+    
+    Com este conjunto de elementos, esta máquina lê os símbolos de uma posição da fita, decide o que vai escrever nesta posição e para qual lado a fita será movida para repetir o processo. Durante esse processo, o estado Q da máquina vai mudando até chegar ou não a um estado final, tornando a palavra de entrada (valores da fita), um programa reconhecido ou não reconhecido. 
+    
+    Turing, entendendo essa ideia, foi um passo além e imaginou uma máquina maior e mais dominante que pudesse controlar a entrada e a saída dessas máquinas computáveis que haviam dentro dela.  Chamada de máquina universal ou \textbf{Máquina de Turing Universal}, esse sistema seria composta de uma ou mais Máquinas de Turing dentro dela, podendo operacionalizar as entradas das sub-maquina e armazenar as suas saída. Este conceito foi teoricamente comprovado e futuramente definido como \textbf{Arquitetura de von Neumann}, que até hoje é considerado como o conceito teórico de qualquer computador moderno. 
+    
+    \subsection{Operando uma Máquina de Turing com uma fita}
+    Uma máquina de Turing opera utilizando os 7 itens da Tupla em conjunto para definir a entrada, a computação e a saída.
+    
+    A entrada de uma Máquina de Turing é definida pelo conjunto de entrada $\Sigma$ e o estado inicial $Q_0$ que ditam o que vai ser escrito na fita e qual o estado inicial da máquina.  O conjunto de entrada, é escrito desde a posição zero da fita até $n$ elementos, sendo $n$ o tamanho do conjunto $\Sigma$. A posição $n+1$ da fita contém um símbolo branco $b$ que corresponde ao fim do conjunto de elementos $\Sigma$. 
+    
+	A configuração da máquina, que em outras palavras significa o que a máquina irá computar para gerar a saída, é composta pelo conjunto das funções de transição $\delta$ e o conjunto finito de estados $Q$. Em cada função de transição $\delta$ é definido as seguintes ações no momento da leitura:
+	
+    	[${\delta : Q\times \Gamma } \longrightarrow  Q\times \Gamma \times {\leftarrow ,\rightarrow}$]
+    	
+    \begin{itemize}
+        \item 1º $Q = $ em que estado $Q$ a máquina está;
+        \item 1º $\Gamma$ = o que o cabeçote deve estar lendo;
         
-    Com este conjunto de elementos, esta máquina lê os símbolos de uma posição da fita, decide o que vai escrever nesta posição e para qual lado a fita será movida para repetir o processo. Durante esse processo, o estado Q da máquina vai mudando até chegar ou não a um estado final, tornando a palavra de entrada (valores da fita), um programa aprovado ou rejeitado.
+        $\longrightarrow$
+        
+        \item 2º $Q = $ para que estado a máquina irá;
+		\item 2º $\Gamma$ = o que deve ser escrito naquela célula da fita;
+		\item ${\leftarrow ,\rightarrow}$ = para que lado que a fita irá correr 1 célula.
+			
+	\end{itemize}
+	
+    O conjunto destas funções de transições compõem os movimentos possíveis dentro do autômato, levando o resultado para uma sequencia de estados $Q$ interligados por estas funções. Na Figura \ref{fig:funcao_de_transicao} podemos ver a relação entre esses 2 elementos da Tupla e entender melhor como seria o interior teórico de uma Maquina de Turing.
+        
 
-\subsection{How to create Sections and Subsections}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{funcao_de_transicao.jpg}
+\caption{\label{fig:funcao_de_transicao}Funções de transição em um conjunto de estados.}
+\end{figure}
 
-Simply use the section and subsection commands, as in this example document! With Overleaf, all the formatting and numbering is handled automatically according to the template you've chosen. If you're using Rich Text mode, you can also create new section and subsections via the buttons in the editor toolbar.
 
-\subsection{How to include Figures}
+
+\subsection{Como funciona uma Maquina de Turing Universal}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Fodase}
+\subsection{Adding photo}
 
 First you have to upload the image file from your computer using the upload link in the file-tree menu. Then use the includegraphics command to include it in your document. Use the figure environment and the caption command to add a number and a caption to your figure. See the code for Figure %\ref{fig:frog}% in this section for an example.
 
@@ -77,6 +138,9 @@ Note that your figure will automatically be placed in the most appropriate place
 %\includegraphics[width=0.3\textwidth]{frog.jpg}
 %\caption{\label{fig:frog}This frog was uploaded via the file-tree menu.}
 %\end{figure}
+
+
+
 
 \subsection{How to add Tables}
 
